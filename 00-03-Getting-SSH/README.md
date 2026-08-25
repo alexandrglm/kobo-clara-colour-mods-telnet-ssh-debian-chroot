@@ -304,6 +304,14 @@ Dropbear supports SCP but **does not support SFTP**. Modern OpenSSH clients atte
 ```bash
 scp -O file root@<KOBOS_IP>:/
 ```
+
+> [!IMPORTANT]
+> If a `stfp-server`binary has been included to `/opt/dropbear/`, remember to symlinnk it properly:
+>   ```ash
+>   ln -sf /opt/dropbear/sftp-server /usr/libexec/sftp-server
+>   ```
+
+
 ---
 
 ## Remove Telnet (Not recommended)
