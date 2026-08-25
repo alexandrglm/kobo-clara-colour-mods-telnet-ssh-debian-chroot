@@ -3,52 +3,106 @@
 GADGET_DIR="/sys/kernel/config/usb_gadget/g1"
 UDC_FILE="$GADGET_DIR/UDC"
 INTERFACE="rndis0"
+DEV_ADDR="00:11:22:33:44:55"
+HOST_ADDR="00:11:22:33:44:56"
+
+create_usb_device() {
+
+    echo "Configuring USB device for the first time..."
+    
+    # 1.1 Create the gadget directory
+    mkdir -p "$GADGET_DIR"
+    cd "$GADGET_DIR" || exit 1
+    
+    # 1.2 Set USB vendor and product IDs
+    echo 0x0525 > idVendor
+    echo 0xa4a2 > idProduct
+    
+    # 1.3 Configure device strings
+    mkdir -p strings/0x409
+    echo "Kobo" > strings/0x409/manufacturer
+    echo "USB Ethernet" > strings/0x409/product
+    
+    # 1.4 Create the RNDIS function with MAC addresses
+    mkdir -p functions/rndis.usb0
+    echo "$DEV_ADDR" > functions/rndis.usb0/dev_addr
+    echo "$HOST_ADDR" > functions/rndis.usb0/host_addr
+    
+    # 1.5 Create the configuration and link the function
+    mkdir -p configs/c.1
+    echo 120 > configs/c.1/MaxPower
+    ln -s functions/rndis.usb0 configs/c.1
+    
+    echo "[OK] Gadget configured successfully (MAC: $DEV_ADDR)"
+}
 
 case "$1" in
+    
     on)
-        if [ -f "$UDC_FILE" ]; then
-            UDC=$(ls /sys/class/udc/ 2>/dev/null | head -1)
-            if [ -n "$UDC" ]; then
-                echo "$UDC" > "$UDC_FILE"
-                ifconfig "$INTERFACE" 192.168.8.2
-                echo "USB Ethernet active on 192.168.8.2 (interface: $INTERFACE)"
-            else
-                echo "Error: No UDC available"
-                exit 1
-            fi
+        if [ ! -d "$GADGET_DIR" ]; then
+            create_usb_device
+        fi
+        
+        UDC=$(ls /sys/class/udc/ 2>/dev/null | head -1)
+        
+        if [ -n "$UDC" ]; then
+            echo "$UDC" > "$UDC_FILE"
+            ifconfig "$INTERFACE" 192.168.8.2 up 2>/dev/null
+            echo "USB Ethernet active on 192.168.8.2 (interface: $INTERFACE, MAC: $DEV_ADDR)"
+        
         else
-            echo "Error: Gadget not configured. Run setup script first."
+            
+            echo "Error: No UDC available"
             exit 1
         fi
         ;;
+    
     off)
+        
         if [ -f "$UDC_FILE" ]; then
+            
             echo "" > "$UDC_FILE"
+            
+            ifconfig "$INTERFACE" down 2>/dev/null
             echo "USB Ethernet deactivated"
+        
         else
-            echo "Error: Gadget not configured"
+            
+            echo "Error: USB not not configured"
             exit 1
         fi
         ;;
+    
     status)
+        
         if [ -f "$UDC_FILE" ]; then
+            
             UDC=$(cat "$UDC_FILE" 2>/dev/null)
+            
             if [ -n "$UDC" ]; then
+            
                 IP=$(ifconfig "$INTERFACE" 2>/dev/null | grep 'inet addr' | awk '{print $2}')
-                echo "USB Ethernet: ACTIVE on $IP"
+                echo "USB Ethernet: ACTIVE on ${IP:-unknown} (MAC: $DEV_ADDR)"
+            
             else
+                
                 echo "USB Ethernet: INACTIVE"
+            
             fi
+        
         else
-            echo "Error: Gadget not configured"
+            
+            echo "Error: USB ethernet not configured"
             exit 1
+        
         fi
         ;;
+    
     *)
-        echo "Usage: usb {on|off|status}"
-        echo "  on      - Activate USB Ethernet (RNDIS) on 192.168.8.2"
-        echo "  off     - Deactivate USB Ethernet"
-        echo "  status  - Show current status"
+        echo "Usage:  usb {on|off|status}"
+        echo "  on      (Activate USB Ethernet (RNDIS) on 192.168.8.2)"
+        echo "  off     (Deactivate USB Ethernet)"
+        echo "  status  (Show current status)"
         exit 1
         ;;
 esac
