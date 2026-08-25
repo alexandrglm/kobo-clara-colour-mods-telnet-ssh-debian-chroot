@@ -92,7 +92,7 @@ case "$1" in
         
         else
             
-            echo "Error: USB ethernet not configured"
+            echo "USB Ethernet is OFF (not configured)"
             exit 1
         
         fi
