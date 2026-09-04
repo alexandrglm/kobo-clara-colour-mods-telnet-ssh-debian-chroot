@@ -1,0 +1,4 @@
+menu_item :main :KOReader :cmd_spawn :quiet :exec /mnt/onboard/.adds/koreader/koreader.sh
+menu_item : main : Plato : cmd_spawn : quiet : exec /mnt/onboard/.adds/plato/plato.sh
+menu_item :main :Reboot :power :reboot
+menu_item :main :Power Off :power :shutdown

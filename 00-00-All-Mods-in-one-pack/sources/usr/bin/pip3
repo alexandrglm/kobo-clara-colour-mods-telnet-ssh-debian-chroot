@@ -1,0 +1,7 @@
+#!/bin/sh
+export PYTHONHOME=/mnt/onboard/.adds/.python
+export PYTHONPATH=/mnt/onboard/.adds/.python/lib/python3.11
+export LD_LIBRARY_PATH=/mnt/onboard/.adds/.python/lib:$LD_LIBRARY_PATH
+export PIP_CACHE_DIR=/mnt/onboard/.adds/.python/cache
+export PIP_NO_CACHE_DIR=false
+exec /mnt/onboard/.adds/.python/bin/pip3 "$@"

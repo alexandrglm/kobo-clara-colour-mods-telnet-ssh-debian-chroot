@@ -1,0 +1,21 @@
+# E.g.: https://app.wallabag.it or https://bag.g3l.org.
+base-url = "https://app.wallabag.it"
+
+# Login information.
+username = "?"
+password = "?"
+
+# Can be generated from the *API clients management* section of the Web UI.
+client-id = "?"
+client-secret = "?"
+
+# Mark the finished articles as read on the server.
+sync-finished = false
+
+# Remove the finished articles from the device.
+remove-finished = false
+
+# Limit the difference between the number of downloaded articles and the
+# number of removed articles. *0* means *∞*. Once that limit is reached,
+# new articles will no longer be downloaded.
+balance-limit = 0

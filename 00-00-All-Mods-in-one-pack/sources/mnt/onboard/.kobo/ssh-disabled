@@ -1,0 +1,4 @@
+To enable ssh:
+- Rename this file to ssh-enabled
+- Reboot the device
+- Connect via: ssh root@<device_ip>
