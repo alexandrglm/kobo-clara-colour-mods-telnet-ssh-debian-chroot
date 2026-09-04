@@ -1,0 +1,2 @@
+menu_item :main :Sudoku :nickel_extras :sudoku
+menu_item :main :Solitaire :nickel_extras :solitaire
