@@ -1,0 +1,8 @@
+#!/bin/sh
+# Kobo Remote Screen target wrapper for /usr/bin/remote-screen
+
+export PYTHONHOME=/mnt/onboard/.adds/.python
+export PYTHONPATH=/mnt/onboard/.adds/.python/lib/python3.11
+export LD_LIBRARY_PATH=/mnt/onboard/.adds/.python/lib:$LD_LIBRARY_PATH
+
+exec /mnt/onboard/.adds/.python/bin/python3.11 /mnt/onboard/.adds/.python/remote-screen-raw.py "$@"
