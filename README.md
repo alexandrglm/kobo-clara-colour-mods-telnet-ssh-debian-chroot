@@ -26,7 +26,8 @@ Methods used here are adaptations and refinements of an existing work for old Ko
 
 > [!IMPORTANT]
 > ### For active development
->   - Toolchain for glibc guide can be found [here](https://github.com/alexandrglm/kobo-clara-colour-toolchain-glibc2.19).
+>   - Toolchain for GLIBC 2.19, **no Qt**, guide can be found [here](https://github.com/alexandrglm/kobo-clara-colour-toolchain-glibc2.19).
+>   - An "official" toolchain with **GLIBC 2.19 and Qt 4.6.2**, for FW 4.x, is explained [here](https://github.com/alexandrglm/kobo-clara-colour-toolchain-glibc2.19-Qt4.6-full) (no bugs, no old-sources compilations issues, Qt 4.x fully functional).
 >   - Also, a full Python 3.11.16 setup can be achieve, [here](https://github.com/alexandrglm/kobo-python3-crosscompile).
 
 ---
