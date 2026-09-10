@@ -22,6 +22,7 @@ Methods used here are adaptations and refinements of an existing work for old Ko
 | **00-04-Getting-ALPINE-chroot** | A complete walkthrough for creating and running an Alpine Linux chroot environment |
 | **00-05-SSH-over-USB** | Simple steps to obtain SSH (or Telnet, or any other service) via USB |
 | **00-06-Fix-Hidden-Games** | Enable the hidden `nickel_extras` (Sudoku, Solitaire) using NickelMenu |
+| **00-07-Add-GoogleDrive-DropBox-OverrideBorrows** | Enable Google Drive, DropBox and the public libraries' Override borrow system primarily vía `NickelMenu` but also enabling it at `Kobo eReader.conf`file |
 
 
 > [!IMPORTANT]

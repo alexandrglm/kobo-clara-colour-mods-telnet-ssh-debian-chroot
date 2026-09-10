@@ -1,0 +1,3 @@
+menu_item :main :GDrive :nickel_open :library:gdrive
+menu_item :main :DropBox :nickel_open :library:dropbox
+menu_item :main :Overdrive :nickel_open :store:overdrive
