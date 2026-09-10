@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-screenshot.py   Captura framebuffer y guarda a PNG sin deps
-Uso: screenshot [--output nombre] [--help]
+screenshot.py   Captures framebuffer and saves to PNG without deps
+Usage: screenshot [--output name] [--help]
 """
 
 import os
@@ -117,7 +117,7 @@ def raw_to_png(raw_path, png_path):
 
         b, g, r, a = data[i:i+4]
 
-        rgb.extend((r, g, b))
+        rgb.extend((b, g, r))
 
     # PNG
     def png_chunk(chunk_type, data):
@@ -194,18 +194,18 @@ def main():
 
     png_path = get_png_path(output_name)
 
-    # print(f"📸 Capturando screenshot...")
+    # print(f"📸 Capturing screenshot...")
 
     if not capture_raw(raw_path):
 
-        print("❌ Error capturando framebuffer")
+        print("❌ Error capturing framebuffer")
         sys.exit(1)
 
 
-    # print(f"🔄 Convirtiendo a PNG...")
+    # print(f"🔄 Converting to PNG...")
     if not raw_to_png(raw_path, png_path):
 
-        print("❌ Error convirtiendo a PNG")
+        print("❌ Error converting to PNG")
         handle_raw_capture(raw_path)
 
         sys.exit(1)
@@ -217,4 +217,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

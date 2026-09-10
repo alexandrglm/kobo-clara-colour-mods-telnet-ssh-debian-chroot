@@ -1,4 +1,4 @@
-# Create an Alpine Linux Chroot
+# Create an Alpine (or Debian, or any `armhf` Linux system) Linux Chroot
 
 This guide explains how to create a complete **Alpine Linux chroot environment** on your Kobo.
 
