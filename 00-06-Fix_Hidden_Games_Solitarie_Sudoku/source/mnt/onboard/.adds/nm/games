@@ -1,2 +1,4 @@
-menu_item :main :Sudoku :nickel_extras :sudoku
-menu_item :main :Solitaire :nickel_extras :solitaire
+menu_item :main :Solitario :nickel_extras :solitaire
+menu_item :main :Sudoku    :nickel_extras :sudoku
+menu_item :main :Scribble :nickel_extras :word_scramble
+menu_item :main :Unblock It :nickel_extras :unblock_it
